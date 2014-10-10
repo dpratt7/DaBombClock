@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 
-public class Schedule extends Activity {
+public class Schedule extends Activity implements View.OnClickListener {
 
     private TimePicker tPicker;
     private Calendar cal;
@@ -61,6 +61,7 @@ public class Schedule extends Activity {
 
                 cal.set(Calendar.HOUR,tPicker.getCurrentHour().intValue());
                 cal.set(Calendar.MINUTE,tPicker.getCurrentMinute().intValue());
+                AlarmService.startActionArm(this, cal.getTimeInMillis());
             }
             break;
 

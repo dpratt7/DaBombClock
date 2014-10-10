@@ -1,6 +1,8 @@
 package com.group.dabomb.dabomb;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 
@@ -12,42 +14,32 @@ import android.content.Context;
  * helper methods.
  */
 public class AlarmService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "com.group.dabomb.dabomb.action.FOO";
-    private static final String ACTION_BAZ = "com.group.dabomb.dabomb.action.BAZ";
-
-    // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "com.group.dabomb.dabomb.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "com.group.dabomb.dabomb.extra.PARAM2";
+    private static final String ACTION_ARM = "com.group.dabomb.dabomb.action.ARM";
+    private static final String ACTION_DISARM = "com.group.dabomb.dabomb.action.DISARM";
+    private static final String EXTRA_TIME = "com.group.dabomb.dabomb.extra.TIME";
 
     /**
-     * Starts this service to perform action Foo with the given parameters. If
+     * Starts this service to perform action Arm with the given parameters. If
      * the service is already performing a task this action will be queued.
      *
      * @see IntentService
      */
-    // TODO: Customize helper method
-    public static void startActionFoo(Context context, String param1, String param2) {
+    public static void startActionArm(Context context, long time) {
         Intent intent = new Intent(context, AlarmService.class);
-        intent.setAction(ACTION_FOO);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_ARM);
+        intent.putExtra(EXTRA_TIME, time);
         context.startService(intent);
     }
 
     /**
-     * Starts this service to perform action Baz with the given parameters. If
+     * Starts this service to perform action Disarm. If
      * the service is already performing a task this action will be queued.
      *
      * @see IntentService
      */
-    // TODO: Customize helper method
-    public static void startActionBaz(Context context, String param1, String param2) {
+    public static void startActionDisarm(Context context) {
         Intent intent = new Intent(context, AlarmService.class);
-        intent.setAction(ACTION_BAZ);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_DISARM);
         context.startService(intent);
     }
 
@@ -59,14 +51,11 @@ public class AlarmService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_FOO.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionFoo(param1, param2);
-            } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionBaz(param1, param2);
+            if (ACTION_ARM.equals(action)) {
+                final long time = intent.getLongExtra(EXTRA_TIME, 0);
+                handleActionArm(time);
+            } else if (ACTION_DISARM.equals(action)) {
+                handleActionDisarm();
             }
         }
     }
@@ -75,17 +64,20 @@ public class AlarmService extends IntentService {
      * Handle action Foo in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void handleActionArm(long time) {
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(this, AlarmReceiver.class);
+        i.putExtra(EXTRA_TIME, time);
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set(AlarmManager.RTC_WAKEUP, time, pi);
     }
 
     /**
      * Handle action Baz in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
+    private void handleActionDisarm() {
+        // TODO: Handle action Disarm
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

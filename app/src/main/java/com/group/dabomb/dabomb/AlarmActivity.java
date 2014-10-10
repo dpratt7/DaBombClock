@@ -1,17 +1,47 @@
 package com.group.dabomb.dabomb;
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import java.io.IOException;
 
 
 public class AlarmActivity extends Activity {
 
+    private MediaPlayer sound;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_alarm);
+
+        Button disarmButton = (Button) findViewById(R.id.disarm_button);
+        disarmButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                sound.stop();
+                finish();
+            }
+        });
+
+        sound = new MediaPlayer();
+        try {
+            //TODO sound.setDataSource(this, toneUri);
+            sound.setAudioStreamType(AudioManager.STREAM_ALARM);
+            sound.setLooping(true);
+            sound.prepare();
+            sound.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

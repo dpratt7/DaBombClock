@@ -26,10 +26,13 @@
             android:exported="false" >
         </service>
 
-        <receiver
-            android:name="com.group.dabomb.dabomb.AlarmReceiver">
+        <receiver android:name=".AlarmReceiver" >
         </receiver>
 
+        <activity
+            android:name=".AlarmActivity"
+            android:label="@string/title_activity_alarm" >
+        </activity>
     </application>
 
 </manifest>

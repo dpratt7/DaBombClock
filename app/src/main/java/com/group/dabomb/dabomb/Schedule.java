@@ -21,7 +21,6 @@ import java.util.Calendar;
 public class Schedule extends Activity implements View.OnClickListener {
 
     private TimePicker tPicker;
-    private Calendar cal;
     private Button cancel;
     private Button submit;
 
@@ -37,7 +36,6 @@ public class Schedule extends Activity implements View.OnClickListener {
     private void initButtons() {
 
         tPicker = (TimePicker) findViewById(R.id.timePicker1);
-        cal = Calendar.getInstance();
         cancel = (Button) findViewById(R.id.dialog_cancel);
         submit = (Button) findViewById(R.id.dialog_ok);
         cancel.setOnClickListener(this);
@@ -50,20 +48,18 @@ public class Schedule extends Activity implements View.OnClickListener {
 
 //If Done button pressed get time selected by user
 
-            case R.id.dialog_cancel: {
+            case R.id.dialog_cancel:
                 Calendar now = Calendar.getInstance();
                 tPicker.clearFocus();
-                tPicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
+                tPicker.setCurrentHour(now.get(Calendar.HOUR));
                 tPicker.setCurrentMinute(now.get(Calendar.MINUTE));
-
-            }
-            case R.id.dialog_ok: {
-
-                cal.set(Calendar.HOUR,tPicker.getCurrentHour().intValue());
+                break;
+            case R.id.dialog_ok:
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY,tPicker.getCurrentHour().intValue());
                 cal.set(Calendar.MINUTE,tPicker.getCurrentMinute().intValue());
                 AlarmService.startActionArm(this, cal.getTimeInMillis());
-            }
-            break;
+                break;
 
             default:
                 break;

@@ -3,6 +3,8 @@ package com.group.dabomb.dabomb;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +35,10 @@ public class AlarmActivity extends Activity {
         });
 
         sound = new MediaPlayer();
+        RingtoneManager toneManager = new RingtoneManager(this);
+        Uri toneUri = toneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         try {
-            //TODO sound.setDataSource(this, toneUri);
+            sound.setDataSource(this, toneUri);
             sound.setAudioStreamType(AudioManager.STREAM_ALARM);
             sound.setLooping(true);
             sound.prepare();

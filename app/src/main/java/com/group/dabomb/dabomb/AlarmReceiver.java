@@ -20,8 +20,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         /**Show notification**/
         /**Launch alarmActivity**/
-        Intent i = new Intent();
-        i.setClassName("com.group.dabomb.dabomb","MainActivity.java");
+        Intent i = new Intent(context, AlarmActivity.class);
+//        Intent i = new Intent();
+//        i.setClassName("com.group.dabomb.dabomb","AlarmActivity.java");
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
 

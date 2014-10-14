@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Schedule"
-            android:label="@string/title_activity_schedule" >
+            android:name=".AlarmActivity"
+            android:label="Alarm" >
         </activity>
 
         <service
@@ -31,7 +31,7 @@
         </service>
 
         <receiver
-            android:name="com.group.dabomb.dabomb.AlarmReceiver">
+            android:name=".AlarmReceiver">
         </receiver>
 
     </application>

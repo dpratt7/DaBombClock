@@ -11,8 +11,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent){
-        Intent i = new Intent();
-        i.setClassName("com.group.dabomb.dabomb","AlarmActivity.java");
+        Intent i = new Intent(context, AlarmActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
 

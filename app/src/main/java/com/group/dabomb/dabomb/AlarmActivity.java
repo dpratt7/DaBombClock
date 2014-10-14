@@ -34,18 +34,9 @@ public class AlarmActivity extends Activity {
             }
         });
 
-        sound = new MediaPlayer();
-        RingtoneManager toneManager = new RingtoneManager(this);
-        Uri toneUri = toneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        try {
-            sound.setDataSource(this, toneUri);
-            sound.setAudioStreamType(AudioManager.STREAM_ALARM);
-            sound.setLooping(true);
-            sound.prepare();
-            sound.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sound = MediaPlayer.create(this,R.raw.bomb_alert_1);
+        sound.setLooping(true);
+        sound.start();
     }
 
 

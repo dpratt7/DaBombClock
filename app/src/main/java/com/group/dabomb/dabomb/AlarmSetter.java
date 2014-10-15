@@ -10,7 +10,7 @@ import android.content.Intent;
 public class AlarmSetter extends BroadcastReceiver {
 
     @Override
-    public void onRecieve(Context context, Intent intent){
+    public void onReceive(Context context, Intent intent){
         Intent setter = new Intent(context,AlarmService.class);
         setter.setAction((AlarmService.Create));
         context.startService(setter);

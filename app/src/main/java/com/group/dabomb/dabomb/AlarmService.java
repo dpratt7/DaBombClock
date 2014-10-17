@@ -44,6 +44,7 @@ public class AlarmService extends IntentService {
     }
 
     public AlarmService() {
+
         super("AlarmService");
     }
 
@@ -79,5 +80,13 @@ public class AlarmService extends IntentService {
     private void handleActionDisarm() {
         // TODO: Handle action Disarm
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    private void createAlarm(){
+        //creates the alarm in alarm manager
+    }
+    private void recreateAlarms(){
+        //read alarms from database
+        //calls createAlarm() for each line in the database
     }
 }

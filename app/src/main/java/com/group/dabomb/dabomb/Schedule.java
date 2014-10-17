@@ -51,7 +51,7 @@ public class Schedule extends Activity implements View.OnClickListener {
             case R.id.dialog_cancel:
                 Calendar now = Calendar.getInstance();
                 tPicker.clearFocus();
-                tPicker.setCurrentHour(now.get(Calendar.HOUR));
+                tPicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
                 tPicker.setCurrentMinute(now.get(Calendar.MINUTE));
                 break;
             case R.id.dialog_ok:

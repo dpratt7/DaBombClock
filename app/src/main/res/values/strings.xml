@@ -8,5 +8,14 @@
     <string name="select">Arm</string>
     <string name="cancel">Disarm</string>
     <string name="title_activity_alarm">AlarmActivity</string>
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 
 </resources>

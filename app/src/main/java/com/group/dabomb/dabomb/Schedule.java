@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import java.util.Calendar;
 public class Schedule extends Activity implements View.OnClickListener {
 
     private TimePicker tPicker;
+    private DatePicker dPicker;
     private Button cancel;
     private Button submit;
 

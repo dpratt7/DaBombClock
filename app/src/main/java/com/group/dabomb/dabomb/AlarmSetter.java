@@ -12,9 +12,8 @@ public class AlarmSetter extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent){
         Intent setter = new Intent(context,AlarmService.class);
-        setter.setAction((AlarmService.Create));
+        //setter.setAction((AlarmService.CREATE));
         context.startService(setter);
 
     }
-
 }

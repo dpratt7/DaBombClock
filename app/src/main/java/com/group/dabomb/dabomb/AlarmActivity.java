@@ -1,21 +1,27 @@
 package com.group.dabomb.dabomb;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.IOException;
 
 
 public class AlarmActivity extends Activity {
 
+    private CountDownTimer countdown;
+    private TextView countdownText;
+    private AudioManager audioManager;
     private MediaPlayer sound;
 
     @Override
@@ -23,6 +29,8 @@ public class AlarmActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_alarm);
+
+        countdownText = (TextView) findViewById(R.id.countdown);
 
         Button disarmButton = (Button) findViewById(R.id.disarm_button);
         disarmButton.setOnClickListener(new View.OnClickListener() {
@@ -34,9 +42,8 @@ public class AlarmActivity extends Activity {
             }
         });
 
-        sound = MediaPlayer.create(this,R.raw.bomb_alert_1);
-        sound.setLooping(true);
-        sound.start();
+        startSound();
+        startCountdown();
     }
 
 
@@ -57,5 +64,32 @@ public class AlarmActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startSound() {
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM) / 2, AudioManager.FLAG_PLAY_SOUND);
+        sound = MediaPlayer.create(this,R.raw.bomb_alert_1);
+        sound.setAudioStreamType(AudioManager.STREAM_ALARM);
+        sound.setLooping(true);
+        sound.start();
+    }
+
+    private void startCountdown() {
+        countdown = new CountDownTimer( 10000, 1000 ) {
+
+            public void onTick( long millisUntilFinished ) {
+                int seconds = (int) millisUntilFinished / 1000;
+                countdownText.setText( String.format( "%d:%d", seconds/60, seconds%60 ) );
+            }
+
+            public void onFinish() {
+                countdownText.setText( "BOOM!" );
+                int volume = (int) Math.min(audioManager.getStreamVolume(AudioManager.STREAM_ALARM) * 1.2, audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, volume, AudioManager.FLAG_PLAY_SOUND);
+                startCountdown();
+            }
+        };
+        countdown.start();
     }
 }

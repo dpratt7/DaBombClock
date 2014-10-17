@@ -17,6 +17,14 @@
         android:text="tick...tick...tick..."
         android:textSize="38dp" />
 
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="0:05"
+        android:textSize="64dp"/>
+
     <Button
         android:id="@+id/disarm_button"
         android:layout_width="wrap_content"

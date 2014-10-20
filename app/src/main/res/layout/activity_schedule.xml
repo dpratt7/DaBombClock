@@ -19,9 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/LinearLayout02"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false" >
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
 
         <LinearLayout
             android:id="@+id/LinearLayout03"
@@ -33,49 +32,63 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mon" />
+            android:text="Mon"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/tuesday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tue" />
+            android:text="Tue"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/wednesday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Wed" />
+            android:text="Wed"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/thursday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Thu" />
+            android:text="Thu"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/friday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Fri" />
+            android:text="Fri"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/saturday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sat" />
+            android:text="Sat"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <Button
             android:id="@+id/sunday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sun" />
+            android:text="Sun"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         </LinearLayout>
 

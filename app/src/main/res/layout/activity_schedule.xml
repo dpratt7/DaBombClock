@@ -14,12 +14,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ListView
-        android:id="@+id/list1"
-        android:entries="@array/days_array"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <HorizontalScrollView
+        android:id="@+id/HorizontalScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LinearLayout02"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" >
 
+        <LinearLayout
+            android:id="@+id/LinearLayout03"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/monday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mon" />
+
+        <Button
+            android:id="@+id/tuesday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tue" />
+
+        <Button
+            android:id="@+id/wednesday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Wed" />
+
+        <Button
+            android:id="@+id/thursday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Thu" />
+
+        <Button
+            android:id="@+id/friday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fri" />
+
+        <Button
+            android:id="@+id/saturday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sat" />
+
+        <Button
+            android:id="@+id/sunday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sun" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/LinearLayout02"

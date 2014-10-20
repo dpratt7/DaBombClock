@@ -85,6 +85,8 @@ public class AlarmService extends IntentService {
     private void createAlarm(){
         //creates the alarm in alarm manager
     }
+
+    /*Recreates alarms from the database*/
     private void recreateAlarms(){
         //read alarms from database
         //calls createAlarm() for each line in the database

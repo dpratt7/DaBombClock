@@ -4,6 +4,9 @@ package com.group.dabomb.dabomb;
  * Created by Stefano on 10/17/2014.
  */
 import android.net.Uri;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class AlarmModel {
 
@@ -23,6 +26,12 @@ public class AlarmModel {
     public Uri alarmTone;
     public String name;
     public boolean isEnabled;
+
+    public AlarmModel(Calendar c) {
+        timeHour = c.get(Calendar.HOUR_OF_DAY);
+        timeMinute = c.get(Calendar.MINUTE);
+        repeatingDays = new boolean[7];
+    }
 
     public AlarmModel() {
         repeatingDays = new boolean[7];

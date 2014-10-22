@@ -28,12 +28,14 @@ public class Schedule extends Activity implements View.OnClickListener {
     private DatePicker dPicker;
     private Button cancel;
     private Button submit;
+    private Calendar cal;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_schedule);
 
+        cal = Calendar.getInstance();
         initButtons();
 
     }
@@ -49,16 +51,121 @@ public class Schedule extends Activity implements View.OnClickListener {
         button.setOnFocusChangeListener(new OnFocusChangeListener() {
             public void onFocusChange(View v, boolean gainFocus) {
                 if (gainFocus) {
-                    System.out.println("monday");
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 2){
+                        day = 2 - day;
+                    }
+                    else{
+                        day = 9 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
                 }
             }
         });
         button = (Button)findViewById(R.id.tuesday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 3){
+                        day = 3 - day;
+                    }
+                    else{
+                        day = 10 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
         button = (Button)findViewById(R.id.wednesday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 4){
+                        day = 4 - day;
+                    }
+                    else{
+                        day = 11 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
         button = (Button)findViewById(R.id.thursday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 5){
+                        day = 5 - day;
+                    }
+                    else{
+                        day = 12 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
         button = (Button)findViewById(R.id.friday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 6){
+                        day = 6 - day;
+                    }
+                    else{
+                        day = 13 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
         button = (Button)findViewById(R.id.saturday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 7){
+                        day = 7 - day;
+                    }
+                    else{
+                        day = 14 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
         button = (Button)findViewById(R.id.sunday);
+        button.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean gainFocus) {
+                if (gainFocus) {
+                    cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if( day <= 1){
+                        day = 1 - day;
+                    }
+                    else{
+                        day = 8 - day;
+                    }
+                    cal.add(Calendar.DATE, day);
+                    System.out.println(cal.toString());
+                }
+            }
+        });
     }
 
     public void onClick(View v) {
@@ -74,7 +181,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                 tPicker.setCurrentMinute(now.get(Calendar.MINUTE));
                 break;
             case R.id.dialog_ok:
-                Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY,tPicker.getCurrentHour().intValue());
                 cal.set(Calendar.MINUTE,tPicker.getCurrentMinute().intValue());
                 AlarmService.startActionArm(this, cal.getTimeInMillis());

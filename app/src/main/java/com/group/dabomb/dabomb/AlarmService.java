@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 
+import java.util.List;
+
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -17,7 +19,7 @@ public class AlarmService extends IntentService {
     private static final String ACTION_ARM = "com.group.dabomb.dabomb.action.ARM";
     private static final String ACTION_DISARM = "com.group.dabomb.dabomb.action.DISARM";
     private static final String EXTRA_TIME = "com.group.dabomb.dabomb.extra.TIME";
-
+    public static final String ACTION_REARM = "com.group.dabomb.dabomb.action.REARM";
     /**
      * Starts this service to perform action Arm with the given parameters. If
      * the service is already performing a task this action will be queued.
@@ -87,8 +89,16 @@ public class AlarmService extends IntentService {
     }
 
     /*Recreates alarms from the database*/
-    private void recreateAlarms(){
-        //read alarms from database
-        //calls createAlarm() for each line in the database
+    private void recreateAlarms(Intent intent){
+        final String action = intent.getAction();
+        AlarmDBHelper dbHelper = new AlarmDBHelper(this);
+        List<AlarmModel> alarmList = dbHelper.getAlarms();
+        if(ACTION_REARM.equals(action)){
+            for (int i=0; i <  alarmList.size(); i++){
+                alarmList.get(i);
+                //handleActionArm();
+
+            }
+        }
     }
 }

@@ -60,7 +60,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 9 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -77,7 +76,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 10 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -94,7 +92,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 11 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -111,7 +108,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 12 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -128,7 +124,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 13 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -145,7 +140,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 14 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });
@@ -162,7 +156,6 @@ public class Schedule extends Activity implements View.OnClickListener {
                         day = 8 - day;
                     }
                     cal.add(Calendar.DATE, day);
-                    System.out.println(cal.toString());
                 }
             }
         });

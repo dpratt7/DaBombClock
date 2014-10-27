@@ -7,6 +7,7 @@
     <string name="title_activity_schedule">Schedule</string>
     <string name="select">Arm</string>
     <string name="cancel">Disarm</string>
+    <string name="countdown">Set Countdown: </string>
     <string name="title_activity_alarm">AlarmActivity</string>
 
 </resources>

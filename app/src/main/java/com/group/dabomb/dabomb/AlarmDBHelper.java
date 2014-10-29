@@ -23,13 +23,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ALARM =
             "CREATE TABLE " + Alarm.TABLE_NAME + " (" +
                     Alarm._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    Alarm.COLUMN_NAME_ALARM_NAME + " TEXT," +
-                    Alarm.COLUMN_NAME_ALARM_TIME_HOUR + " INTEGER," +
-                    Alarm.COLUMN_NAME_ALARM_TIME_MINUTE + " INTEGER," +
-                    Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS + " TEXT," +
-                    Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
-                    Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
-                    Alarm.COLUMN_NAME_ALARM_ENABLED + " BOOLEAN" + " )";
+                    Alarm.COLUMN_NAME_ALARM_TIME + " LONG )";
 
     private static final String SQL_DELETE_ALARM =
             "DROP TABLE IF EXISTS " + Alarm.TABLE_NAME;
@@ -52,35 +46,14 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
     private AlarmModel populateModel(Cursor c) {
         AlarmModel model = new AlarmModel();
         model.id = c.getLong(c.getColumnIndex(Alarm._ID));
-        model.name = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_NAME));
-        model.timeHour = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TIME_HOUR));
-        model.timeMinute = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TIME_MINUTE));
-        model.repeatWeekly = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY)) == 0 ? false : true;
-        model.alarmTone = Uri.parse(c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TONE)));
-        model.isEnabled = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_ENABLED)) == 0 ? false : true;
-
-        String[] repeatingDays = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS)).split(",");
-        for (int i = 0; i < repeatingDays.length; ++i) {
-            model.setRepeatingDay(i, repeatingDays[i].equals("false") ? false : true);
-        }
+        model.time = c.getLong(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TIME));
 
         return model;
     }
 
     private ContentValues populateContent(AlarmModel model) {
         ContentValues values = new ContentValues();
-        values.put(Alarm.COLUMN_NAME_ALARM_NAME, model.name);
-        values.put(Alarm.COLUMN_NAME_ALARM_TIME_HOUR, model.timeHour);
-        values.put(Alarm.COLUMN_NAME_ALARM_TIME_MINUTE, model.timeMinute);
-        values.put(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
-        values.put(Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone.toString());
-
-        String repeatingDays = "";
-        for (int i = 0; i < 7; ++i) {
-            repeatingDays += model.getRepeatingDay(i) + ",";
-        }
-        values.put(Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS, repeatingDays);
-
+        values.put(Alarm.COLUMN_NAME_ALARM_TIME, model.time);
         return values;
     }
 

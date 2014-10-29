@@ -93,10 +93,12 @@ public class AlarmService extends IntentService {
         final String action = intent.getAction();
         AlarmDBHelper dbHelper = new AlarmDBHelper(this);
         List<AlarmModel> alarmList = dbHelper.getAlarms();
+
+        Long time = null;
         if(ACTION_REARM.equals(action)){
             for (int i=0; i <  alarmList.size(); i++){
-                alarmList.get(i);
-                //handleActionArm();
+              time = alarmList.get(i).time; //get new time attribute and get it
+              handleActionArm(time);
 
             }
         }

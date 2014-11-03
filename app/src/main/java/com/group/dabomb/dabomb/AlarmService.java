@@ -68,6 +68,10 @@ public class AlarmService extends IntentService {
      * parameters.
      */
     private void handleActionArm(long time) {
+        AlarmModel model = new AlarmModel(time);
+        AlarmDBHelper db = new AlarmDBHelper(this);
+        db.createAlarm(model);
+
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(this, AlarmReceiver.class);
         i.putExtra(EXTRA_TIME, time);

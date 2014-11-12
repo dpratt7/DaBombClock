@@ -6,49 +6,80 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.Random;
 
 
 public class AlarmActivity extends Activity {
 
     private CountDownTimer countdown;
     private TextView countdownText;
+    private ImageView wires;
     private AudioManager audioManager;
     private MediaPlayer sound;
     private int currentVolume;
     private int stepVolume;
+    private int wire;
+    private int wireLeftBound;
+    private int wireRightBound;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-
         setContentView( R.layout.activity_alarm );
 
         countdownText = (TextView) findViewById( R.id.countdown );
+        wires = (ImageView) findViewById( R.id.wires );
+        TextView prompt = (TextView) findViewById( R.id.prompt );
 
-        Button disarmButton = (Button) findViewById( R.id.disarm_button );
-        disarmButton.setOnClickListener(new View.OnClickListener() {
+        wire = new Random().nextInt( 5 );
+        prompt.setText( "Cut the " + (
+                wire == 0 ? "white" :
+                wire == 1 ? "blue" :
+                wire == 2 ? "green" :
+                wire == 3 ? "yellow" :
+                "red" ) + " wire!" );
 
-            @Override
-            public void onClick(View view) {
-                sound.stop();
-                countdown.cancel();
-                finish();
+        wires.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if( MotionEvent.ACTION_UP == event.getAction() ) {
+                    System.out.println( "X: " + event.getX() + "; Y: " + event.getY() + "; leftBound: " + wireLeftBound + "; rightBound: " + wireRightBound );
+                    if( event.getX() > wireLeftBound && event.getX() < wireRightBound ) {
+                        sound.stop();
+                        countdown.cancel();
+                        wires.setImageResource( wire == 0 ? R.drawable.wires_grey_cut :
+                                wire == 1 ? R.drawable.wires_blue_cut :
+                                wire == 2 ? R.drawable.wires_green_cut :
+                                wire == 3 ? R.drawable.wires_yellow_cut :
+                                R.drawable.wires_red_cut );
+                        finish();
+                    } else {
+                        countdown.onFinish(); //FIXME this is not the right way to do this
+                    }
+                }
+                return true;
             }
         });
 
         startSound();
         startCountdown();
+    }
+
+    @Override
+    public void onWindowFocusChanged( boolean hasFocus ) {
+        ImageView wires = (ImageView) findViewById( R.id.wires );
+        wireLeftBound = wire * wires.getWidth() / 5;
+        wireRightBound = (wire + 1) * wires.getWidth() / 5;
     }
 
 
